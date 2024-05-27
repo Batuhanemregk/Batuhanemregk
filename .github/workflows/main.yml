@@ -1,4 +1,4 @@
-name: Generate Snake
+name: Generate Snake2
 
 on:
   schedule:
@@ -22,20 +22,18 @@ jobs:
           gif_out_path: dist/github-contribution-grid-snake.gif
           svg_out_path: dist/github-contribution-grid-snake.svg
 
-      - name: Show Git Status
-        run: git status
-
       - name: Configure Git
         run: |
-          git config user.name "your-username"
-          git config user.email "your-email@example.com"
+          git config --global user.name "Batuhanemregk"
+          git config --global user.email "batuhan_e_g@hotmail.com"
 
-      - name: Push Changes
-        uses: ad-m/github-push-action@v0.6.0  # Versiyonu belirledik
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          branch: master
-          force: true
+      - name: Commit and Push Changes
+        run: |
+          git add dist/github-contribution-grid-snake.gif dist/github-contribution-grid-snake.svg
+          git commit -m "Update snake animation"
+          git push origin HEAD:master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Deploy to GitHub Pages
         uses: crazy-max/ghaction-github-pages@v3  # Node.js 20 uyumlu sürüm
